@@ -30,19 +30,10 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export EDITOR="$HOME/bin/mate -w"
-export PATH=$HOME/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin:/opt/local/bin:/opt/local/sbin:$PATH
-export DISPLAY=:0.0
+export PATH=$HOME/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin
 
 
-# modify the prompt to contain git branch name if applicable
-git_prompt_info() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null)
-  if [[ -n $ref ]]; then
-    echo " %{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}"
-  fi
-}
-setopt promptsubst
-export PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%c%{$reset_color%}$(git_prompt_info) %# '
+
 
 # load our own completion functions
 fpath=(~/.zsh/completion $fpath)
@@ -51,10 +42,8 @@ fpath=(~/.zsh/completion $fpath)
 autoload -U compinit
 compinit
 
-# load custom executable functions
-for function in ~/.zsh/functions/*; do
-  source $function
-done
+# automatically enter directories without cd
+setopt auto_cd
 
 # use vim as an editor
 export EDITOR=mate
@@ -64,38 +53,19 @@ if [ -e "$HOME/.aliases" ]; then
   source "$HOME/.aliases"
 fi
 
-# makes color constants available
-autoload -U colors
-colors
-
-# enable colored output from ls, etc
-export CLICOLOR=1
-
-# history settings
-setopt hist_ignore_all_dups inc_append_history
-HISTFILE=~/.zhistory
-HISTSIZE=4096
-SAVEHIST=4096
-
-# awesome cd movements from zshkit
-setopt autocd autopushd pushdminus pushdsilent pushdtohome cdablevars
-DIRSTACKSIZE=5
-
-# Enable extended globbing
-setopt extendedglob
-
-# Allow [ or ] whereever you want
-unsetopt nomatch
-
 # vi mode
 bindkey -v
 bindkey "^F" vi-cmd-mode
 bindkey jj vi-cmd-mode
 
-# handy keybindings
+# use incremental search
+bindkey "^R" history-incremental-search-backward
+
+# add some readline keys back
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
-bindkey "^R" history-incremental-search-backward
+
+# handy keybindings
 bindkey "^P" history-search-backward
 bindkey "^Y" accept-and-hold
 bindkey "^N" insert-last-word
@@ -110,32 +80,23 @@ bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 # ignore duplicate history entries
 setopt histignoredups
 
-# use vim as the visual editor
-export VISUAL=vim
-export EDITOR=$VISUAL
+# keep TONS of history
+export HISTSIZE=4096
 
-# ensure dotfiles bin directory is loaded first
-export PATH="$HOME/.bin:/usr/local/bin:$PATH"
+# look for ey config in project dirs
+export EYRC=./.eyrc
 
-# load rbenv if available
-if which rbenv &>/dev/null ; then
-  eval "$(rbenv init - --no-rehash)"
-fi
+# automatically pushd
+setopt auto_pushd
+export dirstacksize=5
 
-# mkdir .git/safe in the root of repositories you trust
-export PATH=".git/safe/../../bin:$PATH"
+# awesome cd movements from zshkit
+setopt AUTOCD
+setopt AUTOPUSHD PUSHDMINUS PUSHDSILENT PUSHDTOHOME
+setopt cdablevars
 
-# aliases
-[[ -f ~/.aliases ]] && source ~/.aliases
-
+# Try to correct command line spelling
+setopt CORRECT CORRECT_ALL
 
 # Enable extended globbing
 setopt EXTENDED_GLOB
-
-#source NVM for old or beta node
-source ~/.nvm/nvm.sh
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-# Local config
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
