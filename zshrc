@@ -43,7 +43,6 @@ git_prompt_info() {
 }
 setopt promptsubst
 export PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%c%{$reset_color%}$(git_prompt_info) %# '
->>>>>>> upstream
 
 # load our own completion functions
 fpath=(~/.zsh/completion $fpath)
@@ -87,7 +86,6 @@ setopt extendedglob
 
 # Allow [ or ] whereever you want
 unsetopt nomatch
->>>>>>> upstream
 
 # vi mode
 bindkey -v
@@ -103,7 +101,6 @@ bindkey "^Y" accept-and-hold
 bindkey "^N" insert-last-word
 bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 
-<<<<<<< HEAD
 # expand functions in the prompt
 # setopt prompt_subst
 
