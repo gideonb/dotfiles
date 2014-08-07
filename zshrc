@@ -101,4 +101,7 @@ setopt CORRECT CORRECT_ALL
 # Enable extended globbing
 setopt EXTENDED_GLOB
 
+#source NVM for old or beta node
+source ~/.nvm/nvm.sh
+
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
