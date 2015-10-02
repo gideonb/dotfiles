@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/Gideon/Development/attribution/client_api/lib'
+let g:netrw_dirhist_2='/Users/Gideon/Development/attribution/client_api/lib/controllers'
+let g:netrw_dirhist_3='/Users/Gideon/Development/attribution/client_api'
+let g:netrw_dirhist_4='/Users/Gideon/Development/attribution/client_api/lib'
+let g:netrw_dirhist_5='/Users/Gideon/Development/attribution/client_api/lib/controllers'
+let g:netrw_dirhist_6='/Users/Gideon/Development/attribution/client_api'
