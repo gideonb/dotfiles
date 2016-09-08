@@ -29,8 +29,8 @@ plugins=(rails git textmate ruby)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export EDITOR="$HOME/bin/mate -w"
-export PATH=$PATH:$HOME/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin
+export EDITOR="$HOME/bin/atom -w"
+export PATH=$PATH:$HOME/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/git/bin:~/Applications/bin
 
 
 
@@ -47,7 +47,7 @@ setopt auto_cd
 
 # use vim as an editor
 export EDITOR=mate
-# 
+#
 # aliases
 if [ -e "$HOME/.aliases" ]; then
   source "$HOME/.aliases"
